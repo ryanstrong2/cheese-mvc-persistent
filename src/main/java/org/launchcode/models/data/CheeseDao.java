@@ -12,4 +12,16 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface CheeseDao extends CrudRepository<Cheese, Integer> {
-}
+//    Iterable<Category> findAll();
+//    String query = "SELECT e FROM CHEESE e";
+//    Iterable<Cheese> cheeseList = createQuery(query);
+//
+//    static Iterable<Cheese> createQuery(String query) {
+    }
+
+
+
+
+
+
+

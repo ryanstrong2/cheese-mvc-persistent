@@ -26,6 +26,8 @@ public class Cheese {
 
     private CheeseType type;
 
+//    private Category category; needs many to many table
+
     public Cheese(String name, String description) {
         this.name = name;
         this.description = description;
@@ -60,4 +62,7 @@ public class Cheese {
     public void setType(CheeseType type) {
         this.type = type;
     }
+
+
+
 }
