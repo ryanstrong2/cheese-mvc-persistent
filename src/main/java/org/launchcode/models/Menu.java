@@ -6,17 +6,16 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
- * Created by LaunchCode
+ * Created by ryanstrong on 4/12/17.
  */
 @Entity
-public class Cheese {
+public class Menu {
+    @ManyToMany
+    private List<Cheese> cheese;
 
     @Id
     @GeneratedValue
     private int id;
-
-    @ManyToMany(mappedBy = "cheeses")
-    private List<Menu> menus;
 
     @NotNull
     @Size(min=3, max=15)
@@ -29,12 +28,21 @@ public class Cheese {
     @ManyToOne
     private Category category;
 
-    public Cheese(String name, String description) {
+    public Menu(String name, String description) {
         this.name = name;
         this.description = description;
     }
 
-    public Cheese() { }
+    public void addItem(Cheese item) {
+
+    }
+
+    public Menu(List<Cheese> cheese, String name) {
+        this.cheese = cheese;
+        this.name = name;
+    }
+
+    public Menu() { }
 
     public int getId() {
         return id;
