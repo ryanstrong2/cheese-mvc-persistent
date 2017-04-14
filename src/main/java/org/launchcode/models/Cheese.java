@@ -15,8 +15,6 @@ public class Cheese {
     @GeneratedValue
     private int id;
 
-    @ManyToMany(mappedBy = "cheeses")
-    private List<Menu> menus;
 
     @NotNull
     @Size(min=3, max=15)
@@ -28,6 +26,9 @@ public class Cheese {
 
     @ManyToOne
     private Category category;
+
+    @ManyToMany(mappedBy = "cheeses")
+    private List<Menu> menus;
 
     public Cheese(String name, String description) {
         this.name = name;

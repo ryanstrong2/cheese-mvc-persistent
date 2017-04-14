@@ -1,6 +1,8 @@
 package org.launchcode.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -8,14 +10,19 @@ import java.util.List;
  */
 @Entity
 public class Menu {
-    private  String name;
-    @ManyToMany
-    private List<Cheese> cheeses;
 
     @Id
     @GeneratedValue
     private int id;
 
+    @NotNull
+    @Size(min=3, max=15)
+    private  String name;
+
+    @ManyToMany
+    private List<Cheese> cheeses;
+
+    public Menu() { }
 
     @ManyToOne
     private Category category;
@@ -34,7 +41,7 @@ public class Menu {
         this.name = name;
     }//accepts value for and sets name
 
-    public Menu() { }
+
 
     public int getId() {
         return id;

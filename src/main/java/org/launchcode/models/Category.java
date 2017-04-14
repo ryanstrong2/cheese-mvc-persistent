@@ -4,7 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +18,10 @@ public class Category {
     @GeneratedValue  //annotations
     private int id; //field
 
-    @NotNull
+
     @Size (min= 3, max=15)
     private String name; //property instance variable
+
 
     @OneToMany
     @JoinColumn(name = "category_id")
@@ -38,4 +38,12 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+    public List<Cheese> getCheeses() {
+        return cheeses;
+    }
+
+    public void setCheeses(List<Cheese> cheeses) {
+        this.cheeses = cheeses;
+    }
+
 }

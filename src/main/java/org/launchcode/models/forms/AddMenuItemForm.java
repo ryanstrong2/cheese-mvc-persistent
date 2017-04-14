@@ -10,13 +10,14 @@ import javax.validation.constraints.NotNull;
  */
 public class AddMenuItemForm {
     @NotNull
-    private int menuId;
+     int menuId;
 
     @NotNull
-    private int cheeseId;
+     int cheeseId;
     private Iterable<Cheese> cheeses;
 
     private Menu menu;
+
     public AddMenuItemForm(){}// default constructor for model binding
     public AddMenuItemForm(Iterable<Cheese> cheeses, Menu menu){
         this.cheeses = cheeses;
