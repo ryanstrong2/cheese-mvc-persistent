@@ -10,7 +10,7 @@ import java.util.List;
 public class Menu {
     private  String name;
     @ManyToMany
-    private List<Cheese> cheese;
+    private List<Cheese> cheeses;
 
     @Id
     @GeneratedValue
@@ -29,8 +29,8 @@ public class Menu {
 
     }
 
-    public Menu(List<Cheese> cheese, String name) {
-        this.cheese = cheese;
+    public Menu(List<Cheese> cheeses, String name) {
+        this.cheeses = cheeses;
         this.name = name;
     }//accepts value for and sets name
 
@@ -52,13 +52,15 @@ public class Menu {
         this.name = name;
     }
 
-    public List<Cheese> getCheese() {
-        return cheese;
+    public List<Cheese> getCheeses() {
+        return cheeses;
     }
 
-    public void setCheese(List<Cheese> cheese) {
-        this.cheese = cheese;
+    public void setCheese(List<Cheese> cheeses) {
+        this.cheeses = cheeses;
     }
+
+
 
 
 //
