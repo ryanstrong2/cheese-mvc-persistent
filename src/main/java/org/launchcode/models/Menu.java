@@ -1,8 +1,6 @@
 package org.launchcode.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -10,6 +8,7 @@ import java.util.List;
  */
 @Entity
 public class Menu {
+    private  String name;
     @ManyToMany
     private List<Cheese> cheese;
 
@@ -17,20 +16,13 @@ public class Menu {
     @GeneratedValue
     private int id;
 
-    @NotNull
-    @Size(min=3, max=15)
-    private String name;
-
-    @NotNull
-    @Size(min=1, message = "Description must not be empty")
-    private String description;
 
     @ManyToOne
     private Category category;
 
-    public Menu(String name, String description) {
+    public Menu(String name) {
         this.name = name;
-        this.description = description;
+
     }
 
     public void addItem(Cheese item) {
@@ -40,12 +32,16 @@ public class Menu {
     public Menu(List<Cheese> cheese, String name) {
         this.cheese = cheese;
         this.name = name;
-    }
+    }//accepts value for and sets name
 
     public Menu() { }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -56,17 +52,27 @@ public class Menu {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public List<Cheese> getCheese() {
+        return cheese;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCheese(List<Cheese> cheese) {
+        this.cheese = cheese;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
 
 }
