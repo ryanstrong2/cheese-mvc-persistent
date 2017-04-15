@@ -83,7 +83,9 @@ public class MenuController {
                           @ModelAttribute @Valid AddMenuItemForm form, Errors errors, @PathVariable int menuId){
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
-            return "menu/add-item/" + menuId;
+            return "menu/add-item";
+//            return "menu/add-item/" + menuId;
+
         }
             Menu theMenu = menuDao.findOne(form.getMenuId());
             Cheese theCheese = cheeseDao.findOne(form.getCheeseId());

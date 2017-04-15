@@ -41,8 +41,6 @@ public class Menu {
         this.name = name;
     }//accepts value for and sets name
 
-
-
     public int getId() {
         return id;
     }
@@ -67,21 +65,13 @@ public class Menu {
         this.cheeses = cheeses;
     }
 
-
-
-
-//
 //    public String getDescription() {
 //        return description;
 //    }
-//
 //    public void setDescription(String description) {
 //        this.description = description;
 //    }
-//
 //    public void setCategory(Category category) {
 //        this.category = category;
 //    }
-
-
 }
