@@ -58,6 +58,7 @@ public class CheeseController {
             return "cheese/add";
         }
         Category cat = categoryDao.findOne(categoryId); //category object
+
         newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
         return "redirect:";
