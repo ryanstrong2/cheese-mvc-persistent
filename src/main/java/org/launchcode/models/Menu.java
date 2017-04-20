@@ -16,13 +16,16 @@ public class Menu {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
-    private  String name;
+    @Size(min = 3, max = 15)
+    private String name;
 
     @ManyToMany
     private List<Cheese> cheeses;
 
-    public Menu() { }
+//    private String description;
+
+    public Menu() {
+    }
 
     @ManyToOne
     private Category category;
@@ -33,7 +36,7 @@ public class Menu {
     }
 
     public void addItem(Cheese item) {
-
+    cheeses.add(item);
     }
 
     public Menu(List<Cheese> cheeses, String name) {
@@ -68,10 +71,15 @@ public class Menu {
 //    public String getDescription() {
 //        return description;
 //    }
+//
 //    public void setDescription(String description) {
 //        this.description = description;
 //    }
-//    public void setCategory(Category category) {
-//        this.category = category;
+
+    public void setCategory(Category category) {
+        this.category = category;
 //    }
+    }
+
+
 }

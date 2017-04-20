@@ -9,13 +9,14 @@
 <form method="post" style="max-width:600px;" th:object="${form}" action="/menu/add-item">
 
     <div class="form-group">
-        <label th:for="cheeseId">Cheese</label>
-        <input th:field="cheese"/>
-        <span th:errors="*{cheeseId}" class="error"></span>
+        <!--<label th:for="cheeseId">Cheese</label>-->
+        <!--<input th:field="*{cheeses}"/>-->
         <select name="cheeseId">
             <option th:each="cheese : *{cheeses}"
                     th:text="${cheese.name}"
                     th:value="${cheese.id}">
+        <span th:errors="*{cheeseId}" class="error"></span>
+
 
             </option>
         </select>

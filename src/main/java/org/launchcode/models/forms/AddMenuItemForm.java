@@ -12,7 +12,7 @@ public class AddMenuItemForm {
     @NotNull
     private int menuId;
 
-    @NotNull
+//    @NotNull
     private int cheeseId;
 
     private Iterable<Cheese> cheeses;
