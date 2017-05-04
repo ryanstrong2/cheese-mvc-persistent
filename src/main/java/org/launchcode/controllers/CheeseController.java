@@ -31,7 +31,6 @@ public class CheeseController {
 
     @ManyToOne
     private Category category;
-    // Request path: /cheese
     @RequestMapping(value = "")
     public String index(Model model) {
 

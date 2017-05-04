@@ -82,14 +82,12 @@ public class MenuController {
 
         AddMenuItemForm form = new AddMenuItemForm(
                 cheeseDao.findAll(),
-//                menuDao.findOne(menuId));
-//                ,
+
                 menu);
         model.addAttribute("title", "Add item to menu: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/add-item";
     }
-//    @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.POST)
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
 
     public String addItem(Model model,
@@ -98,16 +96,12 @@ public class MenuController {
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
             return "menu/add-item";
-//            return "menu/add-item/"+ menuId;
         }
             Menu theMenu = menuDao.findOne(form.getMenuId());
-//            Iterable<Cheese> theCheese = cheeseDao.findAll();
             Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
-//            Menu theMenu = menuDao.findOne(form.getMenuId());
 
             theMenu.addItem(theCheese);
             menuDao.save(theMenu);
-//            return "redirect:view/" + form.getMenuId();
             return "redirect:/menu/view/" + theMenu.getId();
         }
 

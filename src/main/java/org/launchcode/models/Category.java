@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Entity
 public class Category {
-//    Category newCat = new Category();
     @Id
     @GeneratedValue  //annotations
     private int id; //field
