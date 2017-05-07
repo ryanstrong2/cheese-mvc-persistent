@@ -1,9 +1,9 @@
-package org.launchcode.controllers;
+package org.ryanstrong.controllers;
 
-import org.launchcode.models.Category;
-import org.launchcode.models.Cheese;
-import org.launchcode.models.data.CategoryDao;
-import org.launchcode.models.data.CheeseDao;
+import org.ryanstrong.models.Category;
+import org.ryanstrong.models.Cheese;
+import org.ryanstrong.models.data.CategoryDao;
+import org.ryanstrong.models.data.CheeseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,12 +31,11 @@ public class CheeseController {
 
     @ManyToOne
     private Category category;
+
     @RequestMapping(value = "")
     public String index(Model model) {
-
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
-
         return "cheese/index";
     }
 
@@ -51,13 +50,11 @@ public class CheeseController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
                                        Errors errors, @RequestParam int categoryId, Model model) {
-
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             return "cheese/add";
         }
         Category cat = categoryDao.findOne(categoryId); //category object
-
         newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
         return "redirect:";
@@ -72,11 +69,9 @@ public class CheeseController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
-
         for (int cheeseId : cheeseIds) {
             cheeseDao.delete(cheeseId);
         }
-
         return "redirect:";
     }
 

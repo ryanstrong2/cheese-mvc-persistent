@@ -1,7 +1,7 @@
-package org.launchcode.models.forms;
+package org.ryanstrong.models.forms;
 
-import org.launchcode.models.Cheese;
-import org.launchcode.models.Menu;
+import org.ryanstrong.models.Cheese;
+import org.ryanstrong.models.Menu;
 
 import javax.validation.constraints.NotNull;
 

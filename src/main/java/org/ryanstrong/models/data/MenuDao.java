@@ -1,14 +1,15 @@
-package org.launchcode.models.data;
+package org.ryanstrong.models.data;
 
-import org.launchcode.models.Category;
+import org.ryanstrong.models.Menu;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 
 /**
- * Created by LaunchCode
+ * Created by ryanstrong on 4/12/17.
  */
+
 @Repository
 @Transactional
-public interface CategoryDao extends CrudRepository<Category, Integer> {}
+public interface MenuDao extends CrudRepository<Menu, Integer> {}

@@ -1,4 +1,4 @@
-package org.launchcode.models;
+package org.ryanstrong.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -13,26 +13,32 @@ public class Menu {
 
     @Id
     @GeneratedValue
-    private int id;
+    private int id;//menu id
 
     @NotNull
-    @Size(min = 3, max = 15)
-    private String name;
+    @Size(min = 1, max = 15)
+    private String name;//username
 
     @ManyToMany
-    private List<Cheese> cheeses;
+    private List<Cheese> cheeses;//list of numbers
 
+
+
+    public void setMinute(Integer minute) {
+        this.minute = minute;
+    }
+
+//    @ManyToMany
+    private Integer minute;//single number
 //    private String description;
 
     public Menu() {
     }
-
     @ManyToOne
     private Category category;
 
     public Menu(String name) {
         this.name = name;
-
     }
 
     public void addItem(Cheese item) {
@@ -40,10 +46,13 @@ public class Menu {
     }
 
     public Menu(List<Cheese> cheeses, String name) {
-        this.cheeses = cheeses;
+        this.cheeses = cheeses;//gets the list of cheeses to add to menu
         this.name = name;
     }//accepts value for and sets name
-
+    public Menu(Integer minute, String name){
+        this.minute = minute;
+        this.name = name;
+    }
     public int getId() {
         return id;
     }
@@ -68,17 +77,12 @@ public class Menu {
         this.cheeses = cheeses;
     }
 
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
 
     public void setCategory(Category category) {
         this.category = category;
-//    }
+    }
+    public Integer getMinute() {
+        return minute;
     }
 
 

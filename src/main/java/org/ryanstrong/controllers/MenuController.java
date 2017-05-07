@@ -1,19 +1,16 @@
-package org.launchcode.controllers;
+package org.ryanstrong.controllers;
 
-import org.launchcode.models.Cheese;
-import org.launchcode.models.JoinColumn;
-import org.launchcode.models.Menu;
-import org.launchcode.models.data.CheeseDao;
-import org.launchcode.models.data.MenuDao;
-import org.launchcode.models.forms.AddMenuItemForm;
+import org.ryanstrong.models.Cheese;
+import org.ryanstrong.models.JoinColumn;
+import org.ryanstrong.models.Menu;
+import org.ryanstrong.models.data.CheeseDao;
+import org.ryanstrong.models.data.MenuDao;
+import org.ryanstrong.models.forms.AddMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -37,9 +34,10 @@ public class MenuController {
 
     @RequestMapping(value = "")
     public String index(Model model){
+            //, @RequestParam int menuId){// needs call for menu id somewhere
         model.addAttribute("menus", menuDao.findAll());
         model.addAttribute("title", "Menus");
-
+//        model.addAttribute("minute", menuDao.findOne(Id));
         return "menu/index";
     }
     @OneToMany
@@ -82,14 +80,13 @@ public class MenuController {
 
         AddMenuItemForm form = new AddMenuItemForm(
                 cheeseDao.findAll(),
-
+//TODO fix menu/remove/menuID
                 menu);
         model.addAttribute("title", "Add item to menu: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/add-item";
     }
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
-
     public String addItem(Model model,
                           @ModelAttribute @Valid AddMenuItemForm form, Errors errors
     ){
@@ -99,12 +96,24 @@ public class MenuController {
         }
             Menu theMenu = menuDao.findOne(form.getMenuId());
             Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
-
             theMenu.addItem(theCheese);
             menuDao.save(theMenu);
             return "redirect:/menu/view/" + theMenu.getId();
         }
+    @RequestMapping(value = "remove", method = RequestMethod.GET)
+    public String displayRemoveTimeForm(Model model) {
+        model.addAttribute("menus", menuDao.findAll());
+        model.addAttribute("title", "Remove Time");
+        return "menu/remove";
+    }
 
+    @RequestMapping(value = "remove", method = RequestMethod.POST)
+    public String processRemoveTimeForm(@RequestParam int[] menuIds) {
+        for (int menuId : menuIds) {
+            menuDao.delete(menuId);
+        }
+        return "redirect:";
+    }
 
     }
 

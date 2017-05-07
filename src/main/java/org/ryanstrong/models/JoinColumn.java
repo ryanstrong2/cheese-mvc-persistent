@@ -1,4 +1,4 @@
-package org.launchcode.models;
+package org.ryanstrong.models;
 
 /**
  * Created by ryanstrong on 4/12/17.
