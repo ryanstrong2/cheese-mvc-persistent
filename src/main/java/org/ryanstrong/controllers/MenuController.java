@@ -6,6 +6,7 @@ import org.ryanstrong.models.Menu;
 import org.ryanstrong.models.data.CheeseDao;
 import org.ryanstrong.models.data.MenuDao;
 import org.ryanstrong.models.forms.AddMenuItemForm;
+import org.ryanstrong.models.forms.SubtractMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -65,23 +66,18 @@ public class MenuController {
     }
     @RequestMapping(value = "view/{menuId}", method = RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int menuId){
-
         Menu menu = menuDao.findOne(menuId);
         model.addAttribute("title", menu.getName());
         model.addAttribute("cheeses", menu.getCheeses());
         model.addAttribute("menu", menu.getId());
-
         return "menu/view";
     }
     @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.GET)
     public String addItem(Model model, @PathVariable int menuId)
     {
         Menu menu = menuDao.findOne(menuId);
-
         AddMenuItemForm form = new AddMenuItemForm(
-                cheeseDao.findAll(),
-//TODO fix menu/remove/menuID
-                menu);
+                cheeseDao.findAll(), menu);
         model.addAttribute("title", "Add item to menu: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/add-item";
@@ -100,20 +96,33 @@ public class MenuController {
             menuDao.save(theMenu);
             return "redirect:/menu/view/" + theMenu.getId();
         }
-    @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveTimeForm(Model model) {
-        model.addAttribute("menus", menuDao.findAll());
-        model.addAttribute("title", "Remove Time");
+    @RequestMapping(value = "remove/{menuId}", method = RequestMethod.GET)
+    public String reduceTime(Model model, @PathVariable int menuId) {
+        Menu menu = menuDao.findOne(menuId);
+        SubtractMenuItemForm form = new SubtractMenuItemForm(
+                cheeseDao.findAll(), menu);
+        model.addAttribute("title", "Reduce time for: " + menu.getName());
+        model.addAttribute("form", form);
         return "menu/remove";
     }
-
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveTimeForm(@RequestParam int[] menuIds) {
-        for (int menuId : menuIds) {
-            menuDao.delete(menuId);
+    public String reduceTime( Model model,
+                                         @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors
+    ){
+        if (errors.hasErrors()) {
+            model.addAttribute("form", form);
+            return "menu/remove";
         }
-        return "redirect:";
-    }
+//        for (int cheeseId : cheeseIds) {
+//            menuDao.delete(cheeseId);
+//        }
+        Menu theMenu = menuDao.findOne(form.getMenuId());
+        Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
+        theMenu.addItem(theCheese);
+        menuDao.save(theMenu);
+        return "redirect:/menu/view/" + theMenu.getId();
+//    }
 
     }
+}
 

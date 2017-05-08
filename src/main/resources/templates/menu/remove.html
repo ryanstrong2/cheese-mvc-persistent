@@ -7,10 +7,33 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
+
 <form method="post">
-    <div th:each="menu : ${menus}" class="checkbox">
-        <input type="checkbox" name="menuIds" th:value="${menu.id}" th:id="${menu.id}"/>
-        <label th:for="${menu.id}" th:text="${menu.name}"></label>
+    <div th:each="cheese : ${cheeses}" class="checkbox">
+        <!--<input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>-->
+        <input type="checkbox" name="cheeseIds" id="3" value="3" />
+        <label for="3">5</label>
+        <!--<label th:for="${cheese.id}" th:text="${cheese.name}"></label>-->
+        <br />
+    </div>
+    <div class="checkbox">
+        <input type="checkbox" name="cheeseIds" id="2" value="2" />
+        <label for="2">10</label>
+        <br />
+    </div>
+    <div class="checkbox">
+        <input type="checkbox" name="cheeseIds" id="4" value="4" />
+        <label for="4">15</label>
+        <br />
+    </div>
+    <div class="checkbox">
+        <input type="checkbox" name="cheeseIds" id="5" value="5" />
+        <label for="5">30</label>
+        <br />
+    </div>
+    <div class="checkbox">
+        <input type="checkbox" name="cheeseIds" id="1" value="1" />
+        <label for="1">1</label>
         <br />
     </div>
     <input type="submit" value="Remove Time" />
