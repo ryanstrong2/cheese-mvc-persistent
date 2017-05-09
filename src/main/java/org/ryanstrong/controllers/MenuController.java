@@ -107,7 +107,7 @@ public class MenuController {
     }
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String reduceTime( Model model,
-                                         @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors
+                             @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors
     ){
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
@@ -119,7 +119,7 @@ public class MenuController {
         Menu theMenu = menuDao.findOne(form.getMenuId());
         Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
         theMenu.addItem(theCheese);
-        menuDao.save(theMenu);
+        menuDao.delete(theMenu);
         return "redirect:/menu/view/" + theMenu.getId();
 //    }
 

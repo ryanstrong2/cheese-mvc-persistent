@@ -7,37 +7,49 @@
 
 <nav th:replace="fragments :: navigation"></nav>
 
-
-<form method="post">
-    <div th:each="cheese : ${cheeses}" class="checkbox">
-        <!--<input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>-->
-        <input type="checkbox" name="cheeseIds" id="3" value="3" />
-        <label for="3">5</label>
-        <!--<label th:for="${cheese.id}" th:text="${cheese.name}"></label>-->
-        <br />
+<form method="post" style="max-width:600px;" th:object="${form}" action="/menu/remove">
+    <div class="form-group">
+        <select name="cheeseId">
+            <option th:each="cheese : *{cheeses}"
+                    th:text="${cheese.name}"
+                    th:value="${cheese.id}">
+                <span th:errors="*{cheeseId}" class="error"></span>
+            </option>
+        </select>
     </div>
-    <div class="checkbox">
-        <input type="checkbox" name="cheeseIds" id="2" value="2" />
-        <label for="2">10</label>
-        <br />
-    </div>
-    <div class="checkbox">
-        <input type="checkbox" name="cheeseIds" id="4" value="4" />
-        <label for="4">15</label>
-        <br />
-    </div>
-    <div class="checkbox">
-        <input type="checkbox" name="cheeseIds" id="5" value="5" />
-        <label for="5">30</label>
-        <br />
-    </div>
-    <div class="checkbox">
-        <input type="checkbox" name="cheeseIds" id="1" value="1" />
-        <label for="1">1</label>
-        <br />
-    </div>
-    <input type="submit" value="Remove Time" />
+    <input type="hidden" name="menuId" th:value="*{menu.id}"/>
+    <input type="submit" value="delete Time" />
 </form>
+<!--<form method="post">-->
+    <!--<div th:each="cheese : ${cheeses}" class="checkbox">-->
+        <!--<input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>-->
+        <!--&lt;!&ndash;<input type="checkbox" name="cheeseIds" id="3" value="3" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<label for="3">5</label>&ndash;&gt;-->
+        <!--<label th:for="${cheese.id}" th:text="${cheese.name}"></label>-->
+        <!--<br /> //does not display-->
+    <!--</div>-->
+    <!--<div class="checkbox">-->
+        <!--<input type="checkbox" name="cheeseIds" id="2" value="2" />-->
+        <!--<label for="2">10</label>-->
+        <!--<br />-->
+    <!--</div>-->
+    <!--<div class="checkbox">-->
+        <!--<input type="checkbox" name="cheeseIds" id="4" value="4" />-->
+        <!--<label for="4">15</label>-->
+        <!--<br />-->
+    <!--</div>-->
+    <!--<div class="checkbox">-->
+        <!--<input type="checkbox" name="cheeseIds" id="5" value="5" />-->
+        <!--<label for="5">30</label>-->
+        <!--<br />-->
+    <!--</div>-->
+    <!--<div class="checkbox">-->
+        <!--<input type="checkbox" name="cheeseIds" id="1" value="1" />-->
+        <!--<label for="1">1</label>-->
+        <!--<br />-->
+    <!--</div>-->
+    <!--<input type="submit" value="Remove Time" />-->
+<!--</form>-->
 
 </body>
 </html>
