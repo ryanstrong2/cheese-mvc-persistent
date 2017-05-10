@@ -50,6 +50,7 @@ public class MenuController {
         model.addAttribute("title", "Add Menu");
         model.addAttribute(new Menu());
         model.addAttribute("menus", menuDao.findAll());
+
         return "menu/add";
     }
     @RequestMapping(value = "add", method = POST)
@@ -57,10 +58,11 @@ public class MenuController {
                       ) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
+
 //            model.addAttribute("menus", menuDao.findAll());
             return "menu/add";
         }
-
+//
         menuDao.save(newMenu);
         return "redirect:view/" + newMenu.getId();
     }
@@ -115,14 +117,44 @@ public class MenuController {
         }
 //        for (int cheeseId : cheeseIds) {
 //            menuDao.delete(cheeseId);
-//        }
+//        } todo get cheese Integer to be result,  add result to time, save, put chees name in form
+        Integer time=Integer.parseInt(String.valueOf(cheeses));
+        Integer result=time + 9;
         Menu theMenu = menuDao.findOne(form.getMenuId());
         Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
         theMenu.addItem(theCheese);
-        menuDao.delete(theMenu);
-        return "redirect:/menu/view/" + theMenu.getId();
-//    }
+//        menuDao.save(theMenu);
+        menuDao.save(result);
 
+        menuDao.delete(theMenu);
+        // todo convert string to integer add to initial Integer.parseInt()
+        //TODO if else for multiple buttons
+        return "redirect:/menu/view/" + theMenu.getId();
     }
+    @RequestMapping(value = "add-int/{menuId}", method = RequestMethod.GET)
+    public String addInt(Model model, @PathVariable int menuId)
+    {
+        Menu menu = menuDao.findOne(menuId);
+        AddMenuItemForm form = new AddMenuItemForm(
+                cheeseDao.findAll(), menu);
+        model.addAttribute("title", "Add item to menu: " + menu.getName());
+        model.addAttribute("form", form);
+        return "menu/add-int";
+    }
+    @RequestMapping(value = "add-int", method = RequestMethod.POST)
+    public String addInt(Model model,
+                          @ModelAttribute @Valid AddMenuItemForm form, Errors errors
+    ){
+        if (errors.hasErrors()) {
+            model.addAttribute("form", form);
+            return "menu/add-item";
+        }
+        Menu theMenu = menuDao.findOne(form.getMenuId());
+        Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
+        theMenu.addItem(theCheese);
+        menuDao.save(theMenu);
+        return "redirect:/menu/view/" + theMenu.getId();
+    }
+
 }
 

@@ -19,6 +19,8 @@ public class SubtractMenuItemForm {
 
     private Menu menu;
 
+    private Cheese cheese;
+
     public SubtractMenuItemForm(){}// default constructor for model binding
     public SubtractMenuItemForm(Iterable<Cheese> cheeses, Menu menu){
         this.cheeses = cheeses;
