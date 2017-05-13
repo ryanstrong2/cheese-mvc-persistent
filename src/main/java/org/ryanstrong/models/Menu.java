@@ -22,8 +22,10 @@ public class Menu {
     @ManyToMany
     private List<Cheese> cheeses;//list of numbers
 
+    private Integer time;//total time
 
-
+    public void setTime(Integer time) {this.time=time;}
+    public Integer getTime(Integer time) {return time;}
     public void setMinute(Integer minute) {
         this.minute = minute;
     }
@@ -33,6 +35,9 @@ public class Menu {
 //    private String description;
 
     public Menu() {
+    }
+    public Menu(Integer time){
+        this.time=time;
     }
     @ManyToOne
     private Category category;

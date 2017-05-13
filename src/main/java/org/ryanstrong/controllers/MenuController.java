@@ -99,10 +99,10 @@ public class MenuController {
             return "redirect:/menu/view/" + theMenu.getId();
         }
     @RequestMapping(value = "remove/{menuId}", method = RequestMethod.GET)
-    public String reduceTime(Model model, @PathVariable int menuId) {
+    public String reduceTime(Model model, @PathVariable int menuId, @PathVariable int cheeseId) {
         Menu menu = menuDao.findOne(menuId);
         SubtractMenuItemForm form = new SubtractMenuItemForm(
-                cheeseDao.findAll(), menu);
+                cheeseDao.findOne(cheeseId), menu);
         model.addAttribute("title", "Reduce time for: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/remove";
@@ -119,24 +119,24 @@ public class MenuController {
 //            menuDao.delete(cheeseId);
 //        } todo get cheese Integer to be result,  add result to time, save, put chees name in form
         Integer time=Integer.parseInt(String.valueOf(cheeses));
-        Integer result=time + 9;
+        Integer cheese=time + 9;
         Menu theMenu = menuDao.findOne(form.getMenuId());
         Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
         theMenu.addItem(theCheese);
 //        menuDao.save(theMenu);
-        menuDao.save(result);
-
-        menuDao.delete(theMenu);
+        cheeseDao.save(theCheese);//todo make cheese add
+//        menuDao.delete(theMenu);
         // todo convert string to integer add to initial Integer.parseInt()
         //TODO if else for multiple buttons
         return "redirect:/menu/view/" + theMenu.getId();
     }
     @RequestMapping(value = "add-int/{menuId}", method = RequestMethod.GET)
-    public String addInt(Model model, @PathVariable int menuId)
+    public String addInt(Model model, @PathVariable int menuId, @PathVariable Integer cheeseName)
     {
         Menu menu = menuDao.findOne(menuId);
-        AddMenuItemForm form = new AddMenuItemForm(
-                cheeseDao.findAll(), menu);
+        CheeseDao cheeseDao = this.cheeseDao;
+//   todo get Integer from databass     AddMenuItemForm form = new AddMenuItemForm(
+//                cheeseDao(cheeseName), menu);
         model.addAttribute("title", "Add item to menu: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/add-int";

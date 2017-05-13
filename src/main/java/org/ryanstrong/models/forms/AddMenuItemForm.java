@@ -1,6 +1,5 @@
 package org.ryanstrong.models.forms;
 
-import org.ryanstrong.models.Cheese;
 import org.ryanstrong.models.Menu;
 
 import javax.validation.constraints.NotNull;
@@ -15,25 +14,25 @@ public class AddMenuItemForm {
 //    @NotNull
     private int cheeseId;
 
-    private Iterable<Cheese> cheeses;
+    private Integer cheese;
 
     private Menu menu;
 
     public AddMenuItemForm(){}// default constructor for model binding
-    public AddMenuItemForm(Iterable<Cheese> cheeses, Menu menu){
-        this.cheeses = cheeses;
+    public AddMenuItemForm(Integer cheese, Menu menu){
+        this.cheese = cheese;
         this.menu = menu;
     }
     public int getMenuId(){return menuId;}
     public void setMenuId(int menuId){this.menuId = menuId;}
     public int getCheeseId(){return cheeseId;}
     public void setCheeseId(int cheeseId){this.cheeseId = cheeseId;}
-    public Iterable<Cheese> getCheeses(){return cheeses;}
+    public Integer  getCheese(){return cheese;}
     public Menu getMenu(){
         return menu;
     }
-    public void setCheeses(Iterable<Cheese> cheeses) {
-        this.cheeses = cheeses;
+    public void setCheese(Integer cheese) {
+        this.cheese = cheese;
     }
 
     public void setMenu(Menu menu) {
