@@ -42,7 +42,7 @@ public class MenuController {
         return "menu/index";
     }
     @OneToMany
-    @JoinColumn(name="Menu_id")
+    @JoinColumn(number="Menu_id")
     private List<Cheese> cheeses = new ArrayList<>();
 
     @RequestMapping(value="add", method= RequestMethod.GET)
@@ -79,7 +79,7 @@ public class MenuController {
     {
         Menu menu = menuDao.findOne(menuId);
         AddMenuItemForm form = new AddMenuItemForm(
-                cheeseDao.findAll(), menu);
+                cheeseDao.findAll(), menu);//finds list of numbers
         model.addAttribute("title", "Add item to menu: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/add-item";
@@ -98,11 +98,16 @@ public class MenuController {
             menuDao.save(theMenu);
             return "redirect:/menu/view/" + theMenu.getId();
         }
+
     @RequestMapping(value = "remove/{menuId}", method = RequestMethod.GET)
-    public String reduceTime(Model model, @PathVariable int menuId, @PathVariable int cheeseId) {
+    public String reduceTime(Model model, @PathVariable int menuId
+//            , Integer
+//                                         cheeseNumber, AddMenuItemForm form
+    ) {
+
         Menu menu = menuDao.findOne(menuId);
-        SubtractMenuItemForm form = new SubtractMenuItemForm(
-                cheeseDao.findOne(cheeseId), menu);
+        AddMenuItemForm form = new AddMenuItemForm(
+                cheeseDao.findAll(), menu);// finds one number todo make null
         model.addAttribute("title", "Reduce time for: " + menu.getName());
         model.addAttribute("form", form);
         return "menu/remove";
@@ -119,42 +124,44 @@ public class MenuController {
 //            menuDao.delete(cheeseId);
 //        } todo get cheese Integer to be result,  add result to time, save, put chees name in form
         Integer time=Integer.parseInt(String.valueOf(cheeses));
-        Integer cheese=time + 9;
+        Integer cheese=0;
+        cheese += time;
         Menu theMenu = menuDao.findOne(form.getMenuId());
         Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
         theMenu.addItem(theCheese);
 //        menuDao.save(theMenu);
-        cheeseDao.save(theCheese);//todo make cheese add
+        cheeseDao.save(theCheese);
+        //todo make cheese add
 //        menuDao.delete(theMenu);
-        // todo convert string to integer add to initial Integer.parseInt()
+        // todo convert string to integer add to initial
+        // Integer.parseInt()
         //TODO if else for multiple buttons
         return "redirect:/menu/view/" + theMenu.getId();
     }
-    @RequestMapping(value = "add-int/{menuId}", method = RequestMethod.GET)
-    public String addInt(Model model, @PathVariable int menuId, @PathVariable Integer cheeseName)
-    {
-        Menu menu = menuDao.findOne(menuId);
-        CheeseDao cheeseDao = this.cheeseDao;
-//   todo get Integer from databass     AddMenuItemForm form = new AddMenuItemForm(
-//                cheeseDao(cheeseName), menu);
-        model.addAttribute("title", "Add item to menu: " + menu.getName());
-        model.addAttribute("form", form);
-        return "menu/add-int";
-    }
-    @RequestMapping(value = "add-int", method = RequestMethod.POST)
-    public String addInt(Model model,
-                          @ModelAttribute @Valid AddMenuItemForm form, Errors errors
-    ){
-        if (errors.hasErrors()) {
-            model.addAttribute("form", form);
-            return "menu/add-item";
-        }
-        Menu theMenu = menuDao.findOne(form.getMenuId());
-        Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
-        theMenu.addItem(theCheese);
-        menuDao.save(theMenu);
-        return "redirect:/menu/view/" + theMenu.getId();
-    }
+//    @RequestMapping(value = "add-int/{menuId}", method = RequestMethod.GET)
+//    public String addInt(Model model, @PathVariable int menuId)
+//    {
+//        Menu menu = menuDao.findOne(menuId);
+//        AddMenuItemForm form = new AddMenuItemForm(
+//                cheeseDao.findAll(), menu);
+//        model.addAttribute("title", "Add item to menu: " + menu.getName());
+//        model.addAttribute("form", form);
+//        return "menu/add-int";
+//    }
+//    @RequestMapping(value = "add-int", method = RequestMethod.POST)
+//    public String addInt(Model model,
+//                          @ModelAttribute @Valid AddMenuItemForm form, Errors errors
+//    ){
+//        if (errors.hasErrors()) {
+//            model.addAttribute("form", form);
+//            return "menu/add-item";
+//        }
+//        Menu theMenu = menuDao.findOne(form.getMenuId());
+//        Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
+//        theMenu.addItem(theCheese);
+//        menuDao.save(theMenu);
+//        return "redirect:/menu/view/" + theMenu.getId();
+//    }
 
 }
 

@@ -8,8 +8,8 @@
 
 <form method="post" style="max-width:600px;" th:object="${menu}">
     <div class="form-group">
-        <label th:for="name">add</label>
-        <input class="form-control" th:field="*{name}" />
+        <label th:for="number">add</label>
+        <input class="form-control" th:field="*{number}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
     <!--<p><a th:href="'/menu/view/' +{menu.id}"></a></p>-->

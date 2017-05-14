@@ -6,20 +6,29 @@
 <h1 th:text="${title}">Default Title</h1>
 
 <nav th:replace="fragments :: navigation"></nav>
-
-<form method="post" style="max-width:600px;" th:object="${form}" action="/menu/remove">
-    <div class="form-group">
-        <select name="cheeseId">
-            <option th:each="cheese : *{cheeses}"
-                    th:text="${cheese.name}"
-                    th:value="${cheese.id}">
-                <span th:errors="*{cheeseId}" class="error"></span>
-            </option>
-        </select>
+<!--<p th:unless="${cheeses} and ${cheeses.size()}">no users :(</p>-->
+<form method="post">
+    <div th:each="cheese : ${cheeses}" class="checkbox">
+        <input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>
+        <label th:for="${cheese.id}" th:text="${cheese.number}"></label>
+        <br />
     </div>
-    <input type="hidden" name="menuId" th:value="*{menu.id}"/>
-    <input type="submit" value="delete Time" />
+    <input type="submit" value="Remove Time" />
 </form>
+
+<!--<form method="post" style="max-width:600px;" th:object="${form}" action="/menu/remove">-->
+    <!--<div class="form-group">-->
+        <!--<select name="cheeseId">-->
+            <!--<option th:each="cheese : *{cheeses}"-->
+                    <!--th:text="${cheese.name}"-->
+                    <!--th:value="${cheese.id}">-->
+                <!--<span th:errors="*{cheeseId}" class="error"></span>-->
+            <!--</option>-->
+        <!--</select>-->
+    <!--</div>-->
+    <!--<input type="hidden" name="menuId" th:value="*{menu.id}"/>-->
+    <!--<input type="submit" value="delete Time" />-->
+<!--</form>-->
 <!--<form method="post">-->
     <!--<div th:each="cheese : ${cheeses}" class="checkbox">-->
         <!--<input type="checkbox" name="cheeseIds" th:value="${cheese.id}" th:id="${cheese.id}"/>-->

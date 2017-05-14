@@ -18,23 +18,23 @@ public class Category {
     private int id; //field
 
     @NotNull
-    private String name; //property instance variable
+    private String number; //property instance variable
 
 
     @OneToMany
-    @JoinColumn(name = "category_id")
+    @JoinColumn(number = "category_id")
     private List<Cheese> cheeses = new ArrayList<>();
 
     public int getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getNumber() {
+        return number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNumber(String number) {
+        this.number = number;
     }
     public List<Cheese> getCheeses() {
         return cheeses;

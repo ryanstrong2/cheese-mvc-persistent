@@ -16,7 +16,7 @@ public class Cheese {
 
     @NotNull
     //@Size(min=1, max=60)// size does not work with java.lang.Integer here
-    private Integer name;
+    private Integer number;
 
 //    @NotNull
 //    @Size(min=1, message = "Description must not be empty")
@@ -31,7 +31,7 @@ public class Cheese {
     public Cheese(Integer number
 //                  String description
     ) {
-        this.name = number;
+        this.number = number;
 //        this.description = description;
     }
 
@@ -41,12 +41,12 @@ public class Cheese {
         return id;
     }
 
-    public Integer getName() {
-        return name;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setName(Integer name) {
-        this.name = name;
+    public void setNumber(Integer name) {
+        this.number = number;
     }
 
 //    public String getDescription() {
