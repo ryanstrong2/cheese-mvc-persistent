@@ -50,7 +50,6 @@ public class MenuController {
         model.addAttribute("title", "Add Menu");
         model.addAttribute(new Menu());
         model.addAttribute("menus", menuDao.findAll());
-
         return "menu/add";
     }
     @RequestMapping(value = "add", method = POST)
@@ -58,11 +57,8 @@ public class MenuController {
                       ) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
-
-//            model.addAttribute("menus", menuDao.findAll());
             return "menu/add";
         }
-//
         menuDao.save(newMenu);
         return "redirect:view/" + newMenu.getId();
     }
@@ -98,13 +94,11 @@ public class MenuController {
             menuDao.save(theMenu);
             return "redirect:/menu/view/" + theMenu.getId();
         }
-
     @RequestMapping(value = "remove/{menuId}", method = RequestMethod.GET)
     public String reduceTime(Model model, @PathVariable int menuId
 //            , Integer
 //                                         cheeseNumber, AddMenuItemForm form
     ) {
-
         Menu menu = menuDao.findOne(menuId);
         AddMenuItemForm form = new AddMenuItemForm(
                 cheeseDao.findAll(), menu);// finds one number todo make null
@@ -113,24 +107,24 @@ public class MenuController {
         return "menu/remove";
     }
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String reduceTime( Model model,
-                             @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors
-    ){
+    public String reduceTime(Model model,
+                             @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors,
+                             Integer sub){// parameters
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
             return "menu/remove";
         }
 //        for (int cheeseId : cheeseIds) {
-//            menuDao.delete(cheeseId);
+//            menuDao.delete((Iterable<? extends Menu>) form);
 //        } todo get cheese Integer to be result,  add result to time, save, put chees name in form
         Integer time=Integer.parseInt(String.valueOf(cheeses));
         Integer cheese=0;
-        cheese += time;
+        cheese += sub;
         Menu theMenu = menuDao.findOne(form.getMenuId());
         Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
-        theMenu.addItem(theCheese);
+//        theMenu.addItem(theCheese);
 //        menuDao.save(theMenu);
-        cheeseDao.save(theCheese);
+        menuDao.save(theMenu);
         //todo make cheese add
 //        menuDao.delete(theMenu);
         // todo convert string to integer add to initial

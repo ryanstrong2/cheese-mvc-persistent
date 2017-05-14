@@ -14,13 +14,15 @@ public class SubtractMenuItemForm {
 
 //    @NotNull
     private int cheeseId;
-
     private Iterable<Cheese> cheeses;
-
     private Menu menu;
-
     private Cheese cheese;
 
+    public Integer getSub() {
+        return sub;
+    }
+
+    private Integer sub;
     public SubtractMenuItemForm(){}// default constructor for model binding
     public SubtractMenuItemForm(Cheese cheese, Menu menu){
         this.cheese = cheese;

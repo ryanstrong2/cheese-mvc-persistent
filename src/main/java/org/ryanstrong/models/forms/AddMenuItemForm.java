@@ -16,9 +16,7 @@ public class AddMenuItemForm {
     private int cheeseId;
 
     private Iterable<Cheese> cheeses;
-
     private Menu menu;
-
     public AddMenuItemForm(){}// default constructor for model binding
     public AddMenuItemForm(Iterable<Cheese> cheeses, Menu menu){
         this.cheeses = cheeses;
