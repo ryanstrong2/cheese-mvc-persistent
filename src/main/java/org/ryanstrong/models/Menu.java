@@ -42,9 +42,9 @@ public class Menu {
     @ManyToOne
     private Category category;
 
-    public Menu(String name) {
-        this.name = name;
-    }
+//    public Menu(String name) {
+//        this.name = name;
+//    }
 
     public void addItem(Cheese item) {
     cheeses.add(item);

@@ -15,6 +15,13 @@ public class AddMenuItemForm {
 //    @NotNull
     private int cheeseId;
 
+    public int getCheeseNumber() {
+        return cheeseNumber;
+    }
+
+    private int cheeseNumber;
+
+
     private Iterable<Cheese> cheeses;
     private Menu menu;
     public AddMenuItemForm(){}// default constructor for model binding

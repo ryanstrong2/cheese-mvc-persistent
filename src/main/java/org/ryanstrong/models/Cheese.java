@@ -45,7 +45,7 @@ public class Cheese {
         return number;
     }
 
-    public void setNumber(Integer name) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
 

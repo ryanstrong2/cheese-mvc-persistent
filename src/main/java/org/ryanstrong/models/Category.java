@@ -18,7 +18,7 @@ public class Category {
     private int id; //field
 
     @NotNull
-    private String number; //property instance variable
+    private Integer number; //property instance variable
 
 
     @OneToMany
@@ -29,11 +29,11 @@ public class Category {
         return id;
     }
 
-    public String getNumber() {
+    public Integer getNumber() {
         return number;
     }
 
-    public void setNumber(String number) {
+    public void setNumber(Integer number) {
         this.number = number;
     }
     public List<Cheese> getCheeses() {
