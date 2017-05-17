@@ -85,6 +85,7 @@ public class MenuController {
         model.addAttribute("minutes", cheeseDao.findAll());
         return "menu/add-item";
     }
+     int totalTime = 0;
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
     public String addItem(Model model,@RequestParam int cheeseId, Cheese number,
                           @ModelAttribute @Valid AddMenuItemForm form, Errors errors
@@ -96,7 +97,8 @@ public class MenuController {
 
         Menu theMenu = menuDao.findOne(form.getMenuId());
         Cheese theCheese = cheeseDao.findOne(form.getCheeseNumber());
-        Cheese totalTime = new Cheese();
+
+//        int totalTime.setNumber(Cheese.add);
 //        totalTime.getNumber() =cheeseDao.findOne(cheeseId);
 //        todo get total time from dao
 //        theCheese +=  totalTime;

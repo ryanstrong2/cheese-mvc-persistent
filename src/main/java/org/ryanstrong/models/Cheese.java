@@ -10,9 +10,13 @@ import java.util.List;
 @Entity
 public class Cheese {
 
+    void addTime(int number){
+        number=number+time;
+    }
     @Id
     @GeneratedValue
     private int id;
+    private int time;
 
     @NotNull
     //@Size(min=1, max=60)// size does not work with java.lang.Integer here
