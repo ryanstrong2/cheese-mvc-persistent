@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.awt.SystemColor.menu;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -71,6 +73,7 @@ public class MenuController {
         model.addAttribute("title", menu.getName());
         model.addAttribute("cheeses", menu.getCheeses());
         model.addAttribute("menu", menu.getId());
+        model.addAttribute("total", menu.getTime());
         return "menu/view";
     }
 
@@ -82,12 +85,15 @@ public class MenuController {
         model.addAttribute("title", "Add item to menu: " + menu.getName());
         model.addAttribute("form", form);
         model.addAttribute(new Cheese());
+        model.addAttribute("total", menu.getTime());
+
         model.addAttribute("minutes", cheeseDao.findAll());
         return "menu/add-item";
     }
-     int totalTime = 0;
+//     int totalTime = 0;
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
-    public String addItem(Model model,@RequestParam int cheeseId, Cheese number,
+    public String addItem(Model model,@RequestParam int cheeses, Cheese number,
+                          @ModelAttribute Menu time,
                           @ModelAttribute @Valid AddMenuItemForm form, Errors errors
     ) {
         if (errors.hasErrors()) {
@@ -95,13 +101,14 @@ public class MenuController {
             return "menu/add-item";
         }
 
+        int totalTime = menuDao.findOne(time.getTime());
         Menu theMenu = menuDao.findOne(form.getMenuId());
-        Cheese theCheese = cheeseDao.findOne(form.getCheeseNumber());
+        Menu theCheese = menuDao.findOne(form.getCheeseNumber());
 
-//        int totalTime.setNumber(Cheese.add);
 //        totalTime.getNumber() =cheeseDao.findOne(cheeseId);
 //        todo get total time from dao
-//        theCheese +=  totalTime;
+//        int time;
+        totalTime += theCheese ;
         theMenu.getMinute();
 //        Item(theCheese);
 //        theCheese+=number;

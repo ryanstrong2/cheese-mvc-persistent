@@ -25,7 +25,7 @@ public class Menu {
     private Integer time;//total time
 
     public void setTime(Integer time) {this.time=time;}
-    public Integer getTime(Integer time) {return time;}
+    public Integer getTime() {return time;}
     public void setMinute(Integer minute) {
         this.minute = minute;
     }
