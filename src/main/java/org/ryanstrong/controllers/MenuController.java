@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.awt.SystemColor.menu;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
@@ -101,14 +99,14 @@ public class MenuController {
             return "menu/add-item";
         }
 
-        int totalTime = menuDao.findOne(time.getTime());
+//        int totalTime = menuDao.findOne(time.getTime());
         Menu theMenu = menuDao.findOne(form.getMenuId());
-        Menu theCheese = menuDao.findOne(form.getCheeseNumber());
+//       int theCheese = menuDao.findOne(form.getCheeseNumber());
 
 //        totalTime.getNumber() =cheeseDao.findOne(cheeseId);
 //        todo get total time from dao
 //        int time;
-        totalTime += theCheese ;
+        total += cheeses;
         theMenu.getMinute();
 //        Item(theCheese);
 //        theCheese+=number;
