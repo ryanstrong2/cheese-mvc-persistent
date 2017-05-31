@@ -15,7 +15,8 @@ public class Cheese {
     }
     @Id
     @GeneratedValue
-    private int id;
+    private int id;//used to add and remove
+    private static int nextId =1;
     private int time;
 
     @NotNull
@@ -35,14 +36,21 @@ public class Cheese {
     public Cheese(Integer number
 //                  String description
     ) {
+        this();//calls default constructor
         this.number = number;
 //        this.description = description;
     }
 
-    public Cheese() { }
+    public Cheese() {
+        id = nextId;
+        nextId++;
+    }
 
     public int getId() {
         return id;
+    }
+    public void setId(int id){
+        this.id=id;
     }
 
     public Integer getNumber() {

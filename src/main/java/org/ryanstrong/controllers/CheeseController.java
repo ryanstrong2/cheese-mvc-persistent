@@ -75,9 +75,13 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
+    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds, Errors errors, Model model) {
         for (int cheeseId : cheeseIds) {
             cheeseDao.delete(cheeseId);
+        }
+        if (errors.hasErrors()) {
+            model.addAttribute("title", "Add Cheese");
+            return "cheese/add";
         }
         return "redirect:";
     }
