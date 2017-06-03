@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
- * Created by LaunchCode
+ * Created by RyanStrong
  */
 @Entity
 public class Cheese {
@@ -33,11 +33,11 @@ public class Cheese {
     @ManyToMany(mappedBy = "cheeses")
     private List<Menu> menus;
 
-    public Cheese(Integer number
+    public Cheese(int id
 //                  String description
     ) {
         this();//calls default constructor
-        this.number = number;
+        this.id = id;
 //        this.description = description;
     }
 
@@ -45,11 +45,12 @@ public class Cheese {
         id = nextId;
         nextId++;
     }
-
+//    public  Cheese(){}
     public int getId() {
         return id;
     }
-    public void setId(int id){
+    public void setId(int id)
+    {
         this.id=id;
     }
 

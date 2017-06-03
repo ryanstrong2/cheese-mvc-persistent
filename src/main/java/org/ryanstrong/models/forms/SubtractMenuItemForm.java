@@ -13,7 +13,7 @@ public class SubtractMenuItemForm {
     private int menuId;
 
 //    @NotNull
-    private int cheeseId;
+    private int Id;
     private Iterable<Cheese> cheeses;
     private Menu menu;
     private Cheese cheese;
@@ -30,7 +30,7 @@ public class SubtractMenuItemForm {
     }
     public int getMenuId(){return menuId;}
 //    public void setMenuId(int menuId){this.menuId = menuId;}
-    public int getCheeseId(){return cheeseId;}
+    public int getId(){return Id;}
 //    public void setCheeseId(int cheeseId){this.cheeseId = cheeseId;}
     public Iterable<Cheese> getCheeses(){return cheeses;}
     public Menu getMenu(){

@@ -18,15 +18,15 @@
         <!--<span th:errors="*{description}" class="error"></span>-->
     <!--</div>-->
 
-    <div class="form-group">
-        <label th:for="type">Category</label>
-        <select name="categoryId">
-            <option th:each="category : ${categories}"
-                    th:text="${category.number}"
-                    th:value="${category.id}"></option>
-            <!--make this a menu / user-->
-        </select>
-    </div>
+    <!--<div class="form-group">-->
+        <!--<label th:for="type">Category</label>-->
+        <!--<select name="categoryId">-->
+            <!--<option th:each="category : ${categories}"-->
+                    <!--th:text="${category.number}"-->
+                    <!--th:value="${category.id}"></option>-->
+            <!--&lt;!&ndash;make this a menu / user&ndash;&gt;-->
+        <!--</select>-->
+    <!--</div>-->
     <input type="submit" value="Add Time" />
 </form>
 

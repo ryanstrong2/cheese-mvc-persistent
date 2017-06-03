@@ -28,7 +28,7 @@ public class CheeseController {
 
     @ManyToOne
     private Category category;
-
+    public CheeseController(){}
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
@@ -56,7 +56,9 @@ public class CheeseController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
-                                       Errors errors, @RequestParam int categoryId, Model model) {
+                                       Errors errors,
+                                       @RequestParam int categoryId,
+                                       Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             return "cheese/add";
@@ -75,9 +77,9 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds, Errors errors, Model model) {
-        for (int cheeseId : cheeseIds) {
-            cheeseDao.delete(cheeseId);
+    public String processRemoveCheeseForm(@ModelAttribute int[] cheeses, Errors errors, Model model) {
+        for (int cheese : cheeses) {//not found
+            cheeseDao.delete(cheese);
         }
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");

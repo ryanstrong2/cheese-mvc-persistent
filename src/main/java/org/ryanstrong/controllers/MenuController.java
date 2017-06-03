@@ -132,12 +132,14 @@ public class MenuController {
     public String reduceTime(Model model,
 //                             @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors,
                              Integer sub,
-                             @RequestParam int[] menuIds) {// parameters
+                             @RequestParam int[] menuIds
+    ) {// parameters
 //        if (errors.hasErrors()) {
 //            model.addAttribute("form", form);
 //            return "menu/remove";
 //        }
-        for (int menuId : menuIds){ menuDao.delete(menuId);}
+        for (int menuId : menuIds)
+        { menuDao.delete(menuId);}
 //        } todo get cheese Integer to be result,  add result to time, save, put chees name in form
             Integer time = Integer.parseInt(String.valueOf(cheeses));
             Integer cheese = 0;
