@@ -28,7 +28,7 @@ public class CheeseController {
 
     @ManyToOne
     private Category category;
-    public CheeseController(){}
+//    public CheeseController(){}
     @RequestMapping(value = "")
     public String index(Model model) {
         model.addAttribute("cheeses", cheeseDao.findAll());
@@ -50,21 +50,21 @@ public class CheeseController {
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Cheese");
         model.addAttribute(new Cheese());
-        model.addAttribute("categories", categoryDao.findAll());
+//        model.addAttribute("categories", categoryDao.findAll());
         return "cheese/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@ModelAttribute  @Valid Cheese newCheese,
                                        Errors errors,
-                                       @RequestParam int categoryId,
+//                                       @RequestParam int categoryId,
                                        Model model) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
             return "cheese/add";
         }
-        Category cat = categoryDao.findOne(categoryId); //category object
-        newCheese.setCategory(cat);
+//        Category cat = categoryDao.findOne(categoryId); //category object
+//        newCheese.setCategory(cat);
         cheeseDao.save(newCheese);
         return "redirect:";
     }
@@ -77,14 +77,19 @@ public class CheeseController {
     }
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@ModelAttribute int[] cheeses, Errors errors, Model model) {
-        for (int cheese : cheeses) {//not found
-            cheeseDao.delete(cheese);
+    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds
+//            , Errors errors, Model model
+    ) {
+//        if (errors.hasErrors()) {
+//            model.addAttribute("title", "Add Cheese");
+//            return "cheese/remove";
+//        }
+
+        for (int cheeseId : cheeseIds) {//not found
+            cheeseDao.delete(cheeseId);
+
         }
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Cheese");
-            return "cheese/add";
-        }
+
         return "redirect:";
     }
 

@@ -10,9 +10,9 @@ import java.util.List;
 @Entity
 public class Cheese {
 
-    void addTime(int number){
-        number=number+time;
-    }
+//    void addTime(int number){
+//        number=number+time;
+//    }
     @Id
     @GeneratedValue
     private int id;//used to add and remove
@@ -27,19 +27,18 @@ public class Cheese {
 //    @Size(min=1, message = "Description must not be empty")
 //    private String description;
 
-    @ManyToOne
-    private Category category;
+//    @ManyToOne
+//    private Category category;// not needed
 
     @ManyToMany(mappedBy = "cheeses")
     private List<Menu> menus;
 
-    public Cheese(int id
-//                  String description
-    ) {
-        this();//calls default constructor
-        this.id = id;
-//        this.description = description;
-    }
+//    public Cheese(int id
+//    ) {
+//        this();//calls default constructor
+//        this.id = id;
+////        this.description = description;
+//    }
 
     public Cheese() {
         id = nextId;
@@ -67,12 +66,13 @@ public class Cheese {
 //    }
 //    public void setDescription(String description) {
 //        this.description = description;
+////    }
+//    public Category getCategory(){return category;}
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
 //    }
-    public Category getCategory(){return category;}
 
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-
+//todo add and remove user
+    //todo add and remove time
 }
