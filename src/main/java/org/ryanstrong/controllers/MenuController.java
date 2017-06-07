@@ -6,6 +6,7 @@ import org.ryanstrong.models.Menu;
 import org.ryanstrong.models.data.CheeseDao;
 import org.ryanstrong.models.data.MenuDao;
 import org.ryanstrong.models.forms.AddMenuItemForm;
+import org.ryanstrong.models.forms.SubtractMenuItemForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -93,13 +94,13 @@ public class MenuController {
 //            ,@RequestParam int cheeses
 //            , Cheese number
 //                          @ModelAttribute Menu time
+                          ,@RequestParam int menuId
                          , @ModelAttribute @Valid AddMenuItemForm form, Errors errors
     ) {
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
             return "menu/add-item";
         }
-
 //        int totalTime = menuDao.findOne(time.getTime());
         Menu theMenu = menuDao.findOne(form.getMenuId());
 //       int theCheese = menuDao.findOne(form.getCheeseNumber());
@@ -109,7 +110,7 @@ public class MenuController {
 //        todo get total time from dao
 //        int time;
 //        total += cheeses;
-        theMenu.getMinute();
+//        theMenu.getMinute();
 //        Item(theCheese);
 //        theCheese+=number;
         menuDao.save(theMenu);
@@ -133,18 +134,21 @@ public class MenuController {
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String reduceTime(
 //            Model model,
-//                             @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors,
+            @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors,
 //                             Integer sub,
-//                             @RequestParam int[] menuId,
-                             @RequestParam int[] cheeseIds
+                             @RequestParam Integer menuId,
+            @RequestParam int[] cheeseIds
     ) {// parameters
 //        if (errors.hasErrors()) {
 //            model.addAttribute("form", form);
 //            return "menu/remove";
 //        }
-//        for (int  cheese : cheeses)
-//        { menuDao.delete(cheese);}
+        Menu user= menuDao.findOne(menuId);
+        form.setMenu(user);
+
+
         for(int cheeseId:cheeseIds){
+//            menuDao.delete(cheeseId);
             menuDao.delete(cheeseId);
         }
 //        } todo get cheese Integer to be result,  add result to time, save, put chees name in form

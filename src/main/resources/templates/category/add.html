@@ -30,7 +30,7 @@
     <!--<input type="submit" value="Add Category" />-->
 <!--</form>-->
 <form action="#" th:action="@{/time}" th:object="${time}" method="post">
-    <p>Id: <input type="text" th:field="*{id}" /></p>
+    <input type="text" th:field="*{category.id}" />
     <p>Message: <input type="text" th:field="*{content}" /></p>
     <p><input type="submit" value="Submit" /></p>
         <!--<input type="reset" value="Reset" />-->
