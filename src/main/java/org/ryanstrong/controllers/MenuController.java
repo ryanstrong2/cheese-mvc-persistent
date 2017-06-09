@@ -75,7 +75,7 @@ public class MenuController {
         model.addAttribute("total", menu.getTime());
         return "menu/view";
     }
-
+// final int ONE =1
     @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.GET)
     public String addItem(Model model, @PathVariable int menuId) {
         Menu menu = menuDao.findOne(menuId);
@@ -137,7 +137,7 @@ public class MenuController {
             @ModelAttribute @Valid SubtractMenuItemForm form, Errors errors,
 //                             Integer sub,
                              @RequestParam Integer menuId,
-            @RequestParam int[] cheeseIds
+            @ModelAttribute int[] cheeses_id
     ) {// parameters
 //        if (errors.hasErrors()) {
 //            model.addAttribute("form", form);
@@ -147,9 +147,9 @@ public class MenuController {
         form.setMenu(user);
 
 
-        for(int cheeseId:cheeseIds){
+        for(int cheeseId:cheeses_id){
 //            menuDao.delete(cheeseId);
-            menuDao.delete(cheeseId);
+            menuDao.delete (cheeseId);
         }
 //        } todo get cheese Integer to be result,  add result to time, save, put chees name in form
 //            Integer time = Integer.parseInt(String.valueOf(cheeses));
