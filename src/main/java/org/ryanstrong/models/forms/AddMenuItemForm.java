@@ -20,7 +20,13 @@ public class AddMenuItemForm {
     }
 
     private int cheeseNumber;
+    private Integer timeToPlay;
 
+    private void addNumbers(Integer timeToPlay, Integer timeChange){
+        timeToPlay = timeToPlay + timeChange;
+    }
+    public Integer getTimeToPlay(){
+        return timeToPlay;}
 
     private Iterable<Cheese> cheeses;
     private Menu menu;

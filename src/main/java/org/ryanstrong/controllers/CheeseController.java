@@ -1,20 +1,20 @@
 package org.ryanstrong.controllers;
 
-import org.ryanstrong.models.Category;
 import org.ryanstrong.models.Cheese;
-import org.ryanstrong.models.data.CategoryDao;
 import org.ryanstrong.models.data.CheeseDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.persistence.ManyToOne;
 import javax.validation.Valid;
 
 /**
- * Created by LaunchCode
+ * Created by Ryan Strong
  */
 @Controller
 @RequestMapping("cheese")
@@ -23,28 +23,19 @@ public class CheeseController {
     @Autowired
     private CheeseDao cheeseDao;
 
-    @Autowired
-    private CategoryDao categoryDao;
-
-    @ManyToOne
-    private Category category;
-//    public CheeseController(){}
+//    @Autowired
+//    private CategoryDao categoryDao;
+//
+//    @ManyToOne
+//    private Category category;
     @RequestMapping(value = "")
     public String index(Model model) {
+
         model.addAttribute("cheeses", cheeseDao.findAll());
         model.addAttribute("title", "My Cheeses");
+
         return "cheese/index";
     }
-//    @GetMapping("/add")
-//    public String cheeseForm(Model model) {
-//        model.addAttribute("greeting", new Cheese());
-//        return "cheese/index";
-//    }
-//
-//    @PostMapping("/add")
-//    public String cheeseSubmit(@ModelAttribute Cheese cheese) {
-//        return "cheese/index";
-//    }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
@@ -64,7 +55,9 @@ public class CheeseController {
             return "cheese/add";
         }
 //        Category cat = categoryDao.findOne(categoryId); //category object
+//
 //        newCheese.setCategory(cat);
+
         cheeseDao.save(newCheese);
         return "redirect:";
     }
@@ -78,16 +71,11 @@ public class CheeseController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds
-//            , Errors errors, Model model
+//            , @ModelAttribute Cheese newCheese
     ) {
-//        if (errors.hasErrors()) {
-//            model.addAttribute("title", "Add Cheese");
-//            return "cheese/remove";
-//        }
 
-        for (int cheeseId : cheeseIds) {//not found
+        for (int cheeseId : cheeseIds) {
             cheeseDao.delete(cheeseId);
-
         }
 
         return "redirect:";
