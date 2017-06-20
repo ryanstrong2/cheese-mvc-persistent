@@ -14,10 +14,10 @@
             <!--th:text="${cheese.timeToPlay}"></li>-->
 
 </ul>
-<p th:text="${cheese.timeToPlay}" th:unless="${cheese.timeToPlay.size()}">pbbb</p>
-<p th:unless="${cheeses.size()}"><i>No Time</i></p>
+<p th:text="${menu.timeToPlays}" th:unless="${timeToPlays.size()}">pbbb</p>
+<!--<p th:unless="${cheeses.size()}"><i>No Time</i></p>-->
 
-
+<td th:text="${menu.timeToPlay == null ? '' : menu.timeToPlay}"/>
 <!--<p th:unless="${cheeses.size()}"><i>No Cheese yet</i></p>-->
 
 

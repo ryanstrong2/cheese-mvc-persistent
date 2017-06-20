@@ -1,10 +1,7 @@
 package org.ryanstrong.models;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -33,14 +30,16 @@ public class Cheese {
 //    @GeneratedValue
 //    private int id;
 
-    private Integer timeToPlay;
+    @OneToOne(mappedBy = "timeToPlays")
+//    private List<Menu> menuTimeToPlay;
+    private Menu user;
 
     private void addNumbers(Integer timeToPlay, Integer timeChange){
         timeToPlay = timeToPlay + timeChange;
     }
-    public Integer getTimeToPlay(){
-        return timeToPlay;
-    }
+//    public Integer getTimeToPlay(){
+//        return timeToPlay;
+//    }
     //@NotNull
 //    @Size(min=3, max=15)
     private String name;

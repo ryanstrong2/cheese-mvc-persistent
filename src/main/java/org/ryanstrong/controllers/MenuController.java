@@ -83,7 +83,7 @@ public class MenuController {
 //                cheeseDao.findOne(), menu
 //        );
         model.addAttribute("title", "Add item to menu: " + menu.getName());
-        model.addAttribute("time", time.getTimeToPlay());
+        model.addAttribute("time", menu.getTimeToPlay());
         model.addAttribute("form", form);
 
         return "menu/add-item";

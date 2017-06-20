@@ -21,8 +21,11 @@ public class Menu {
 
     @ManyToMany
     private List<Cheese> cheeses;//list of numbers
-
+    @OneToOne
+    private Integer timeToPlays;
     private Integer time;//total time
+
+    private Integer timeToPlay;
 
     public void setTime(Integer time) {this.time=time;}
     public Integer getTime() {return time;}
@@ -36,11 +39,11 @@ public class Menu {
 
     public Menu() {
     }
-    public Menu(Integer time){
-        this.time=time;
-    }
-    @ManyToOne
-    private Category category;
+//    public Menu(Integer time){
+//        this.time=time;
+//    }
+//    @ManyToOne
+//    private Category category;
 
 //    public Menu(String name) {
 //        this.name = name;
@@ -58,6 +61,7 @@ public class Menu {
         this.minute = minute;
         this.name = name;
     }
+    public Menu(Integer timeToPlays){this.timeToPlays=timeToPlays;}
     public int getId() {
         return id;
     }
@@ -82,10 +86,15 @@ public class Menu {
         this.cheeses = cheeses;
     }
 
+    public Integer getTimeToPlay(){return timeToPlay;}
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setTimeToPlay(Integer timeToPlay){
+        this.timeToPlay = timeToPlay;
     }
+
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
     public Integer getMinute() {
         return minute;
     }
