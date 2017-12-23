@@ -1,7 +1,9 @@
 package org.ryanstrong.controllers;
 
 import org.ryanstrong.models.Cheese;
+import org.ryanstrong.models.Menu;
 import org.ryanstrong.models.data.CheeseDao;
+import org.ryanstrong.models.data.MenuDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 
-/**
- * Created by Ryan Strong
- */
+
 @Controller
 @RequestMapping("cheese")
 public class CheeseController {
 
     @Autowired
     private CheeseDao cheeseDao;
+    @Autowired
+    private MenuDao menuDao;
 
 //    @Autowired
 //    private CategoryDao categoryDao;
@@ -73,11 +75,20 @@ public class CheeseController {
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds
 //            , @ModelAttribute Cheese newCheese
     ) {
+        final Iterable<Menu> menus=menuDao.findAll();
+        for (int cheeseId: cheeseIds) {
+            final Cheese cheese = cheeseDao.findOne(cheeseId);
+            for (Menu menu : menus) {
+                if (menu.getCheeses().contains(cheese)) {
+                    menu.getCheeses().remove(cheese);
+                    menuDao.save(menu);
+                }
+            }
 
-        for (int cheeseId : cheeseIds) {
-            cheeseDao.delete(cheeseId);
+            for (int someId : cheeseIds) {
+                cheeseDao.delete(someId);
+            }
         }
-
         return "redirect:";
     }
 

@@ -1,6 +1,7 @@
 package org.ryanstrong.controllers;
 
 import org.ryanstrong.models.Cheese;
+import org.ryanstrong.models.JoinColumn;
 import org.ryanstrong.models.Menu;
 import org.ryanstrong.models.data.CheeseDao;
 import org.ryanstrong.models.data.MenuDao;
@@ -9,7 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -18,9 +22,7 @@ import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
-/**
- * Created by ryanstrong on 4/12/17.
- */
+
 @Controller
 @RequestMapping(value="menu")
 public class MenuController {
@@ -39,7 +41,7 @@ public class MenuController {
         return "menu/index";
     }
     @OneToMany
-//    @JoinColumn(name="Menu_id")
+    @JoinColumn(name="Menu_id")
     private List<Cheese> cheeses = new ArrayList<>();
 
     @RequestMapping(value="add", method= RequestMethod.GET)
@@ -71,24 +73,18 @@ public class MenuController {
 
         return "menu/view";
     }
-
     @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.GET)
-    public String addItem(Model model, @PathVariable int menuId, Integer timeToPlay)
+    public String addItem(Model model, @PathVariable int menuId)
     {
         Menu menu = menuDao.findOne(menuId);
-        Cheese time = cheeseDao.findOne(timeToPlay);
         AddMenuItemForm form = new AddMenuItemForm(
                 cheeseDao.findAll(), menu);
-//        Cheese total= new Cheese(
-//                cheeseDao.findOne(), menu
-//        );
         model.addAttribute("title", "Add item to menu: " + menu.getName());
-        model.addAttribute("time", menu.getTimeToPlay());
         model.addAttribute("form", form);
-
         return "menu/add-item";
     }
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
+
     public String addItem(Model model,
                           @ModelAttribute @Valid AddMenuItemForm form, Errors errors
     ){
@@ -97,35 +93,13 @@ public class MenuController {
             return "menu/add-item";
         }
             Menu theMenu = menuDao.findOne(form.getMenuId());
-//            Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
+            Cheese theCheese = cheeseDao.findOne(form.getCheeseId());
 
-//            theMenu.addItem(theCheese);
+            theMenu.addItem(theCheese);
             menuDao.save(theMenu);
             return "redirect:/menu/view/" + theMenu.getId();
         }
-//    @RequestMapping(value = "remove", method = RequestMethod.GET)
-//    public String removeItem(Model model){
-//        return "menu/remove";
-//    }
-
-    @RequestMapping(value = "remove", method = RequestMethod.GET)
-    public String displayRemoveCheeseForm(Model model) {
-//        model.addAttribute("cheeses", cheeseDao.findAll());
-        model.addAttribute("title", "Remove user");
-        return "menu/remove";
-    }
 
 
-    @RequestMapping(value = "remove", method = RequestMethod.POST)
-    public String processRemoveCheeseForm(@RequestParam int[] cheeseIds
-//            , @ModelAttribute Cheese newCheese
-    ) {
-
-        for (int cheeseId : cheeseIds) {
-//            cheeseDao.delete(cheeseId);
-        }
-
-        return "redirect:";
-    }
     }
 

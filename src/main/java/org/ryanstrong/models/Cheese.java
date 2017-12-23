@@ -1,7 +1,7 @@
 package org.ryanstrong.models;
 
 import javax.persistence.*;
-
+import javax.persistence.JoinColumn;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Entity
 public class Cheese {
-
+//todo
     void addTime(int number){
         number=number+tim;
     }
@@ -24,15 +24,17 @@ public class Cheese {
     @NotNull
     //@Size(min=1, max=60)// size does not work with java.lang.Integer here
     private Integer number;
+    @OneToMany
+    @JoinColumn(name="Menu_id")
+    private List<Menu> menus;// list of times
+
 
 //    @NotNull
 //    @javax.persistence.Id
 //    @GeneratedValue
 //    private int id;
 
-    @OneToOne(mappedBy = "timeToPlays")
-//    private List<Menu> menuTimeToPlay;
-    private Menu user;
+
 
     private void addNumbers(Integer timeToPlay, Integer timeChange){
         timeToPlay = timeToPlay + timeChange;
@@ -52,8 +54,8 @@ public class Cheese {
 //    private Category category;// not needed
 //    private Category category;
 
-    @ManyToMany(mappedBy = "cheeses")
-    private List<Menu> menus;
+//    @ManyToMany(mappedBy = "cheeses")
+//    private List<Menu> menus;
 
 //    public Cheese(int id
 //    ) {

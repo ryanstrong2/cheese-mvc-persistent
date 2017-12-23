@@ -21,22 +21,21 @@ public class Menu {
 
     @ManyToMany
     private List<Cheese> cheeses;//list of numbers
-    @OneToOne
-    private Integer timeToPlays;
-    private Integer time;//total time
+    @ManyToOne
+    private Cheese timeToPlays;
 
-    private Integer timeToPlay;
-
-    public void setTime(Integer time) {this.time=time;}
-    public Integer getTime() {return time;}
-    public void setMinute(Integer minute) {
-        this.minute = minute;
-    }
+//
+//    public void setTime(Integer time) {this.time=time;}
+//    public Integer getTime() {return time;}
+//    public void setMinute(Integer minute) {
+//        this.minute = minute;
+//    }
 
 //    @ManyToMany
-    private Integer minute;//single number
+//    private Integer minute;//single number
 //    private String description;
-
+    private Integer timeToPlay;
+//    private Integer time;//total time
     public Menu() {
     }
 //    public Menu(Integer time){
@@ -53,15 +52,17 @@ public class Menu {
     cheeses.add(item);
     }
 
-    public Menu(List<Cheese> cheeses, String name) {
+    public Menu(List<Cheese> cheeses
+//            , String name
+    ) {
         this.cheeses = cheeses;//gets the list of cheeses to add to menu
-        this.name = name;
+//        this.name = name;
     }//accepts value for and sets name
-    public Menu(Integer minute, String name){
-        this.minute = minute;
-        this.name = name;
-    }
-    public Menu(Integer timeToPlays){this.timeToPlays=timeToPlays;}
+//    public Menu(Integer minute, String name){
+//        this.minute = minute;
+//        this.name = name;
+//    }
+//    public Menu(Integer timeToPlays){this.timeToPlays=timeToPlays;}
     public int getId() {
         return id;
     }
@@ -95,9 +96,9 @@ public class Menu {
 //    public void setCategory(Category category) {
 //        this.category = category;
 //    }
-    public Integer getMinute() {
-        return minute;
-    }
+//    public Integer getMinute() {
+//        return minute;
+//    }
 
 
 }
